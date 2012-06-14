@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.summary       = 'Provides a composed_of_enum method for ActiveRecord '\
                       'models that binds enum classes with an enum integer '\
                       'column.'
-  gem.homepage      = 'http://www.github.com/activerecord_composed_of_enum'
+  gem.homepage      = 'http://www.github.com/ohwillie/activerecord_composed_of_enum'
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
