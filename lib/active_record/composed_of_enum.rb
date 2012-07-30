@@ -34,18 +34,20 @@ module ActiveRecord
         :inclusion => 0...enumeration.size
       )
 
+      setter_method_name = :"#{part}="
+
       if options.has_key?(:default)
         after_initialize do
-          send(:"#{part}=", options[:default]) unless send(part).present?
+          send(setter_method_name, options[:default]) unless send(part).present?
         end
       end
 
-      composed_of(
-        part,
-        :class_name => base.name,
-        :mapping => [enum_column.to_s],
-        :constructor => lambda { |cd| cd.present? ? enumeration[cd] : nil }
-      )
+      define_method(setter_method_name) { |enum| self[enum_column] = enum.send(enum_column) }
+
+      define_method(part) do
+        enum_cd = self[enum_column]
+        enum_cd.present? ? enumeration[enum_cd] : nil
+      end
     end
   end
 end
