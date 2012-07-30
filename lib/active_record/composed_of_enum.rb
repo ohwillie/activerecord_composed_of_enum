@@ -16,11 +16,7 @@ module ActiveRecord
       base = options[:base]
       enum_column = :"#{part}_cd"
 
-      base.class_attribute(
-        enum_column,
-        :instance_reader => false,
-        :instance_reader => false
-      )
+      base.class_attribute(enum_column, :instance_accessor => false)
 
       enumeration = options[:enumeration]
 
